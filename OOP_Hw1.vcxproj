@@ -22,10 +22,12 @@
     <ClCompile Include="fraction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="myint.cpp" />
+    <ClCompile Include="mynat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fraction.h" />
     <ClInclude Include="myint.h" />
+    <ClInclude Include="mynat.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

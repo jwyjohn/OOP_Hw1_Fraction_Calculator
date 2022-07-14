@@ -9,6 +9,7 @@
 #include<string>
 #include<map>
 #include"fraction.h"
+#include"mynat.h"
 
 using namespace std;
 
@@ -27,6 +28,8 @@ void show_help();
 
 int main()
 {
+	//cout << (myint(4) % myint(2)).to_string() << endl;
+	//return 0;
 	show_banner();
 	string op;
 	map<string, fraction> workspace;

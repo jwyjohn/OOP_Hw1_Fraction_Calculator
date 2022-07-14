@@ -4,30 +4,51 @@
 
 myint gcd(const myint& a, const myint& b)
 {
-	// a, b > 0
-	if (b != 0)
-		return gcd(b, a % b);
-	return a;
+
+	myint t, r, m = a, n = b;
+	if (m < n)
+	{
+		t = m;
+		m = n;
+		n = t;
+	}
+	while ((m % n) != 0)
+	{
+		//std::clog << "\n[Debug] gcd " << m.to_string() << " " << n.to_string() << std::endl;
+		r = m % n;
+		m = n;
+		n = r;
+		//std::clog << "\n[Debug] gcd " << " " << r.to_string() << m.to_string() << " " << n.to_string() << std::endl;
+	}
+	//std::clog << "\n[Debug] gcd done " << n.to_string() << std::endl;
+	return n;
 }
 
 void fraction::normalize()
 {
+	//std::clog << "\n[Debug] 1 reducing" << this->to_string() << std::endl;
 	if (b < 0)
 	{
+		//std::clog << "\n[Debug] 1.1 reducing" << this->to_string() << std::endl;
 		a = -a;
 		b = -b;
 	}
+	//std::clog << "\n[Debug] 2 reducing" << this->to_string() << std::endl;
 	if (b == 0)
 	{
 		std::cerr << "\n[Divide by zero] " << this->to_string() << " 分母不能为零" << std::endl;
 		return;
 	}
+	//std::clog << "\n[Debug] 3 reducing" << this->to_string() << std::endl;
 	bool is_neg = (a < 0);
 	if (is_neg) { a = -a; }
+	//std::clog << "\n[Debug] 4 reducing" << this->to_string() << std::endl;
 	myint g = gcd(a, b);
+	//std::clog << "\n[Debug] 5 reducing" << this->to_string() << " gcd = " << g.to_string() << std::endl;
 	a = a / g;
 	b = b / g;
 	if (is_neg) { a = -a; }
+	//std::clog << "\n[Debug] 6 reducing" << this->to_string() << std::endl;
 }
 
 fraction::fraction() : a(0), b(1)
@@ -82,7 +103,7 @@ fraction::fraction(const std::string& s)
 		b = 1;
 		return;
 	}
-	a = myint(s.substr(0,pos));
+	a = myint(s.substr(0, pos));
 	b = myint(s.substr(pos + 1));
 	if (b == 0)
 	{

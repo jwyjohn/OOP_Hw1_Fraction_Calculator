@@ -24,12 +24,18 @@
     <ClCompile Include="myint.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="mynat.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fraction.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="myint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mynat.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
