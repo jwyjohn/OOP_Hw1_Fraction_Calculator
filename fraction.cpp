@@ -19,7 +19,7 @@ void fraction::normalize()
 	}
 	if (b == 0)
 	{
-		std::cerr << "[Divide by zero] " << this->to_string() << " 分母不能为零" << std::endl;
+		std::cerr << "\n[Divide by zero] " << this->to_string() << " 分母不能为零" << std::endl;
 		return;
 	}
 	bool is_neg = (a < 0);
@@ -44,7 +44,7 @@ fraction::fraction(const fraction& m)
 	b = m.b;
 	if (b == 0)
 	{
-		std::clog << "[Warning] creating a fraction with denominator = 0" << std::endl;
+		std::clog << "\n[Warning] creating a fraction with denominator = 0" << std::endl;
 	}
 }
 
@@ -54,7 +54,7 @@ fraction::fraction(const fraction* m)
 	b = m->b;
 	if (b == 0)
 	{
-		std::clog << "[Warning] creating a fraction with denominator = 0" << std::endl;
+		std::clog << "\n[Warning] creating a fraction with denominator = 0" << std::endl;
 	}
 }
 
@@ -64,7 +64,7 @@ fraction::fraction(const myint& am, const myint& bm)
 	b = bm;
 	if (b == 0)
 	{
-		std::clog << "[Warning] creating a fraction with denominator = 0" << std::endl;
+		std::clog << "\n[Warning] creating a fraction with denominator = 0" << std::endl;
 	}
 }
 
@@ -86,7 +86,7 @@ fraction::fraction(const std::string& s)
 	b = myint(s.substr(pos + 1));
 	if (b == 0)
 	{
-		std::clog << "[Warning] creating a fraction with denominator = 0" << std::endl;
+		std::clog << "\n[Warning] creating a fraction with denominator = 0" << std::endl;
 	}
 }
 
@@ -109,15 +109,6 @@ fraction::fraction(const double f, int n)
 	a = ans1;
 	b = ans2;
 	normalize();
-}
-
-fraction::fraction(int a1, int b1)
-{
-	a = a1, b = b1;
-	if (b == 0)
-	{
-		std::clog << "[Warning] creating a fraction with denominator = 0" << std::endl;
-	}
 }
 
 std::string fraction::to_string() const

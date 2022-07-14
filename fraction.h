@@ -17,7 +17,6 @@ public:
 	fraction(const myint&, const myint&);
 	fraction(const std::string&);
 	fraction(const double, int n = 10000);
-	fraction(int, int);
 	std::string to_string() const;
 	fraction operator-() const;
 	fraction reciprocal() const;

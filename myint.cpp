@@ -43,6 +43,8 @@ myint::myint(const std::string& s)
 		pos++;
 	}
 	v = ret.v;
+	if (is_neg)
+		v = v * (-1);
 }
 
 std::string myint::to_string() const
