@@ -73,7 +73,8 @@ std::string myint::to_string() const
 myint myint::operator-() const
 {
 	myint ret(this);
-	ret.sign = -ret.sign;
+	if (v != 0)
+		ret.sign = -ret.sign;
 	return ret;
 }
 

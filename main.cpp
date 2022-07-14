@@ -35,7 +35,7 @@ int main()
 	map<string, fraction> workspace;
 	while (true)
 	{
-		cout << "\n\nfraction> ";
+		cout << "\nfraction> ";
 		cin >> op;
 		if (op == "#")
 		{
@@ -156,10 +156,13 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			workspace[t] = workspace[s1] + workspace[s2];
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
-			cout << t << " = " << workspace[t].to_string() << endl;
+			cout << t << " = ";
+			workspace[t].display();
 		}
 		if (op == "sub")
 		{
@@ -175,10 +178,13 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			workspace[t] = workspace[s1] - workspace[s2];
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
-			cout << t << " = " << workspace[t].to_string() << endl;
+			cout << t << " = ";
+			workspace[t].display();
 		}
 		if (op == "mul")
 		{
@@ -194,10 +200,13 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			workspace[t] = workspace[s1] * workspace[s2];
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
-			cout << t << " = " << workspace[t].to_string() << endl;
+			cout << t << " = ";
+			workspace[t].display();
 		}
 		if (op == "div")
 		{
@@ -213,10 +222,13 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			workspace[t] = workspace[s1] / workspace[s2];
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
-			cout << t << " = " << workspace[t].to_string() << endl;
+			cout << t << " = ";
+			workspace[t].display();
 		}
 		if (op == "eq")
 		{
@@ -232,8 +244,10 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			if (workspace[s1] == workspace[s2])
 			{
 				cout << "#True" << endl;
@@ -257,8 +271,10 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			if (workspace[s1] > workspace[s2])
 			{
 				cout << "#True" << endl;
@@ -282,8 +298,10 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			if (workspace[s1] < workspace[s2])
 			{
 				cout << "#True" << endl;
@@ -307,8 +325,10 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			if (workspace[s1] >= workspace[s2])
 			{
 				cout << "#True" << endl;
@@ -332,8 +352,10 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			if (workspace[s1] <= workspace[s2])
 			{
 				cout << "#True" << endl;
@@ -357,8 +379,10 @@ int main()
 				clog << "[Error] fraction " << s2 << " not exist" << endl;
 				continue;
 			}
-			cout << s1 << " = " << workspace[s1].to_string() << endl;
-			cout << s2 << " = " << workspace[s2].to_string() << endl;
+			cout << s1 << " = ";
+			workspace[s1].display();
+			cout << s2 << " = ";
+			workspace[s2].display();
 			if (workspace[s1] != workspace[s2])
 			{
 				cout << "#True" << endl;

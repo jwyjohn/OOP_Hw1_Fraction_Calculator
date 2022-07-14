@@ -183,6 +183,8 @@ mynat mynat::operator-(const mynat& m) const
 		a = b;
 		b = tmp;
 	}
+	//if (m == mynat(this))
+	//	return mynat(0);
 	mynat ret = a;
 	mynat k = b;
 	int len1 = (int)ret.v.length(), len2 = (int)k.v.length(), j = len2;
@@ -206,9 +208,9 @@ mynat mynat::operator-(const mynat& m) const
 			}
 			ret.v[pos] = ret.v[pos] - 1;
 		}
-		while (ret.v.length() > 1 && ret.v.back() == '0')
-			ret.v.pop_back();
 	}
+	while (ret.v.length() > 1 && ret.v.back() == '0')
+		ret.v.pop_back();
 	return ret;
 }
 
@@ -220,34 +222,16 @@ mynat mynat::operator%(const mynat& m) const
 		std::clog << "[Warninig] mynat mod by 0 " << std::endl;
 		return mynat(0);
 	}
+	if (m == 1)
+	{
+		return mynat(0);
+	}
 	if (m >= mynat(this))
 		return mynat(this);
 	mynat ret = mynat(this);
 	mynat k = m * ((ret + 1) / m);
 	int len1 = (int)ret.v.length(), len2 = (int)k.v.length(), j = len2;
-	while (j--)
-	{
-		int i = j;
-		if (ret.v[i] >= k.v[i])
-		{
-			ret.v[i] = ret.v[i] - k.v[i] + '0';
-		}
-		else
-		{
-			int buf = 10 + ret.v[i] - '0';
-			buf = buf - (k.v[i] - '0');
-			ret.v[i] = buf + '0';
-			int pos = i + 1;
-			while (ret.v[pos] == '0')
-			{
-				ret.v[pos] = '9';
-				pos++;
-			}
-			ret.v[pos] = ret.v[pos] - 1;
-		}
-		while (ret.v.length() > 1 && ret.v.back() == '0')
-			ret.v.pop_back();
-	}
+	ret = ret - k;
 	return ret;
 }
 

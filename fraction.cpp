@@ -39,6 +39,11 @@ void fraction::normalize()
 		std::cerr << "\n[Divide by zero] " << this->to_string() << " 分母不能为零" << std::endl;
 		return;
 	}
+	if (a == 0)
+	{
+		b = 1;
+		return;
+	}
 	//std::clog << "\n[Debug] 3 reducing" << this->to_string() << std::endl;
 	bool is_neg = (a < 0);
 	if (is_neg) { a = -a; }
@@ -127,8 +132,8 @@ fraction::fraction(const double f, int n)
 		}
 	}
 	if (f < 0) { ans1 = -ans1; };
-	a = ans1;
-	b = ans2;
+	a = myint(ans1);
+	b = myint(ans2);
 	normalize();
 }
 
