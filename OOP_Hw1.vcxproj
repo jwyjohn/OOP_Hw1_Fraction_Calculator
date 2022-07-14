@@ -19,7 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="fraction.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="myint.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="fraction.h" />
+    <ClInclude Include="myint.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
