@@ -229,24 +229,124 @@ breaklines=true, %对过长的代码自动换行
 
 \subsection{四则运算}
 
+\paragraph{加法} 测试用例 \lstinline{549755813888/1099511627776 + 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_op_add.jpg}
+    \caption{四则运算-加法测试结果（符合预期）}
+\end{figure}
+
+\paragraph{减法} 测试用例 \lstinline{549755813888/1099511627776 - 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_op_sub.jpg}
+    \caption{四则运算-减法测试结果（符合预期）}
+\end{figure}
+
+\paragraph{乘法} 测试用例 \lstinline{549755813888/1099511627776 * 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_op_mul.jpg}
+    \caption{四则运算-乘法测试结果（符合预期）}
+\end{figure}
+
+\paragraph{除法} 测试用例 \lstinline{549755813888/1099511627776 / 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_op_div.jpg}
+    \caption{四则运算-除法测试结果（符合预期）}
+\end{figure}
+
 \subsection{比较运算}
+
+\paragraph{大于} 测试用例 \lstinline{-549755813888/1099511627776 > 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_r_gt.jpg}
+    \caption{比较运算-除法测试结果（符合预期）}
+\end{figure}
+
+\paragraph{小于} 测试用例 \lstinline{-549755813888/1099511627776 < 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_r_lt.jpg}
+    \caption{比较运算-除法测试结果（符合预期）}
+\end{figure}
+
+\paragraph{等于} 测试用例 \lstinline{-549755813888/1099511627776 == 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_r_eq.jpg}
+    \caption{比较运算-除法测试结果（符合预期）}
+\end{figure}
+
+\paragraph{大于等于} 测试用例 \lstinline{-549755813888/1099511627776 >= 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_r_geq.jpg}
+    \caption{比较运算-大于等于测试结果（符合预期）}
+\end{figure}
+
+\paragraph{小于等于} 测试用例 \lstinline{-549755813888/1099511627776 <= 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_r_leq.jpg}
+    \caption{比较运算-小于等于测试结果（符合预期）}
+\end{figure}
+
+\paragraph{不等于} 测试用例 \lstinline{-549755813888/1099511627776 != 1/-3}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/test_r_neq.jpg}
+    \caption{比较运算-不等于测试结果（符合预期）}
+\end{figure}
 
 \section{设计思路}
 
 \subsection{分层开发}
 
+为了实现一个支持任意精度运算分数类，直接使用 \lstinline{int64} 等常规的数据类型是不够的。同时为了方便开发与调试，应当优先完成分数类的核心功能，即完成分数的构造，运算和比较功能的实现，然后再对其底层依赖的整数进行高精度的改造。
+
+于是笔者使用了如下的策略：首先创建一个 \lstinline{myint} 类，该类最初是 \lstinline{int} 的简单封装，提供了整数的构造，运算和比较功能。然后，在构建 \lstinline{fraction} 类时，分子和分母使用 \lstinline{myint} 类的对象。在基于 \lstinline{myint} 类提供的接口实现并测试好 \lstinline{fraction} 类后，便着手将 \lstinline{myint} 类重构为支持高精度的版本。
+
+重构 \lstinline{myint} 类时，为了方便调试，笔者创建了一个 \lstinline{mynat} 类用于进行高精度的自然数操作，然后在 \lstinline{myint} 中引入\lstinline{mynat} 对象和正负号，就可以方便地实现 \lstinline{fraction} 类所需要的方法。
+
 \subsection{组合优于继承}
 
+面向对象编程中，有一条非常经典的设计原则，那就是：组合优于继承，多用组合少用继承。这个表述最早出现在 GoF 的《Design Patterns: Elements of Reusable Object-Oriented Software》中。在本次作业中，笔者并没有让整数类继承自然数类，也没有让分数类继承整数类，而是使用组合的方式，在整数类中使用自然数类的对象并在分数类中使用整数类的对象。
+
+这样使用组合的方式，相比使用继承的机制，有诸多优势。除了可以避免继承带来的代码重复率高的问题外，组合对象的方式对于小型项目可以方便重构的进行。一般而言，继承应当在接口和实例之间使用，而非用于实例之间。
+
 \subsection{类图}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{imgs/class_diagram.jpg}
+    \caption{本次作业的类图}
+\end{figure}
 
 \section{实现细节}
 
 \subsection{高精度正整数类}
 
+高精度正整数类的实践主要依托 \lstinline{std::string} 类，其各个运算的实现均和正常人使用竖式进行计算的过程一致。在二次开发中值得注意的是，由于正整数不包含负数，故而重载的运算符减号实现的是两数字的差的绝对值。
+
+在实现的细节上，\lstinline{std::string} 类用于倒序存储一个十进制整数的各位数字，即最低位存储在 \lstinline{s[0]} 中，十位存储在 \lstinline{s[1]} 中，且笔者的实现保证除了 0 以外，其余正整数的字符串中没有前导的 0 。
+
 \subsection{高精度整数类}
+高精度整数类使用一个高精度正整数类对象表示其绝对值，使用一个整数表示其符号，该整数的取值为 1 或 -1 。对于整数 0 ，我们规定其符号为正。
+
+其余函数的实现几乎都是按操作数的符号分情况讨论，并直接调用正整数类的成员函数。二次开发时，注意取操作结果的正负号只与被取模的数一致。
 
 \subsection{高精度分数类}
+高精度分数类使用两个正整数类对象分别表示分子和分母，一个高精度分数类对象的标准形式为：分子符号表示分数的符号，分母的符号为正，且分子分母的最大公因数为 1 。
+
+高精度分数类对象的四则运算主要基于正常的通分进行，且结果不会进行标准化，因为按照作业的要求，对于一个分数的约分和标准化是需要手动进行的。在出现分母为 0 的情况时，分数类会报异常，并且此时的计算结果是不可信的。
 
 \section{作业小结}
+
+在本次作业中，笔者完成了 \lstinline{fraction} 类的构建与测试，从而实践了面向对象程序设计中的一些基本概念，例如封装和多态等。作业中通过构造自然数类和整数类，从而完成了分数类的构建，从而实践了面向对象程序设计的一些思路。
+
+笔者构建的分数类的计算效率主要取决于自然数类的实现，如果将自然数类中的乘法使用 FFT （快速傅里叶变换）或者 NTT （快速数论变换）进行改进，则可以较大地提升性能，而无需修改整数类或者分数类的实现。
 
 \end{document}
